@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     public GameObject model;//检索Player对象下挂载的模型
-    public PlayerInput pi;
+    public KeyboardInput pi;
     public float moveSpeed = 2.5f;
     public float runMultiple = 2.4f;
     public float jumpVec = 4.0f;
@@ -17,17 +17,18 @@ public class PlayerControl : MonoBehaviour
     private Rigidbody _rb;
     private Vector3 _pV;//plane vector，平面移动向量
     private Vector3 thrustVec;//冲量；
+    private Vector3 dP;//deltaPositon
     private CapsuleCollider _col;
     private bool lockPlaneVector = false; //bool锁定平面移动向量
     private bool canAttack;
     private float lerpTarget;
     void Awake()
     {
-        pi = GetComponent<PlayerInput>();//调用PlayerInput脚本
+        pi = GetComponent<KeyboardInput>();//调用PlayerInput脚本
         ani = model.GetComponent<Animator>();//调用AnimatorAPI
         //m_ani = gameObject.GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();//调用RidigbodyAPI
-        _col = GetComponent<CapsuleCollider>();
+        _col = GetComponent<CapsuleCollider>();//调用胶囊碰撞
     }
     // Start is called before the first frame update
     void Start()
@@ -67,7 +68,9 @@ public class PlayerControl : MonoBehaviour
         {
             _pV = pi.Dmag * model.transform.forward * moveSpeed * ((pi.walk) ? 1.0f : runMultiple);//平面移动速度向量
         }
+        _rb.position += dP;
         _rb.position += _pV * Time.fixedDeltaTime; //平面移动坐标向量
+        dP = Vector3.zero;
         /*_rb.velocity = new Vector3(_pV.x, _rb.velocity.y, _pV.z) + thrustVec;
         thrustVec = Vector3.zero;*/
     }
@@ -178,4 +181,8 @@ public class PlayerControl : MonoBehaviour
         ani.SetLayerWeight(ani.GetLayerIndex("Attack"), currentWeight);
     }
     
+    public void OnUpdateRootMotion(object _dP)
+    {
+        dP += (Vector3) _dP;
+    }
 }

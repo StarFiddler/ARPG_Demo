@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Linq;
-public class PlayerInput: MonoBehaviour
+public class KeyboardInput: IUserInput
 {
 	public string keyUp = "w";
 	public string keyDown = "s";
@@ -11,20 +11,20 @@ public class PlayerInput: MonoBehaviour
 	public string keyJump;
 	public string keyDash;
 	public string keyAttack1;
-	public float Dup;
-	public float Dright;
-	public float Dmag;
-	public Vector3 Dvec;
-	public float MouseX;
-	public float MouseY;
-	public bool inputEnable = true;
-	public bool walk;
-	public bool attack;
-	private bool lastAttack;
-	private float targetDup;
-	private float targetDright;
-	private float velocityDup;
-	private float velocityDright;
+	// public float Dup;
+	// public float Dright;
+	// public float Dmag;
+	// public Vector3 Dvec;
+	// public float MouseX;
+	// public float MouseY;
+	// public bool inputEnable = true;
+	// public bool walk;
+	// public bool attack;
+	// private bool lastAttack;
+	// private float targetDup;
+	// private float targetDright;
+	// private float velocityDup;
+	// private float velocityDright;
 	void Start()
 	{
 
@@ -58,12 +58,12 @@ public class PlayerInput: MonoBehaviour
 		Dvec = Dright2 * transform.right + Dup2 * transform.forward;
 	}
 
-	private Vector2 SquareToCircle(Vector2 input)//将平面直角坐标转换为圆形坐标
-	{
-		Vector2 output = Vector2.zero;
+	// private Vector2 SquareToCircle(Vector2 input)//将平面直角坐标转换为圆形坐标
+	// {
+	// 	Vector2 output = Vector2.zero;
 
-		output.x = input.x * Mathf.Sqrt(1-(input.y * input.y) / 2.0f);
-		output.y = input.y * Mathf.Sqrt(1-(input.x * input.x) / 2.0f);
-		return output;
-	} 
+	// 	output.x = input.x * Mathf.Sqrt(1-(input.y * input.y) / 2.0f);
+	// 	output.y = input.y * Mathf.Sqrt(1-(input.x * input.x) / 2.0f);
+	// 	return output;
+	// } 
 }

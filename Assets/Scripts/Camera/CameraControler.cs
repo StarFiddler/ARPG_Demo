@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CameraControler : MonoBehaviour
 {
-    public PlayerInput pi;
+    public KeyboardInput pi;
     public float hSpeed = 200.0f;
     public float vSpeed = 100.0f;
     public float cameraCatchSpeed = 0.05f;
@@ -42,5 +42,6 @@ public class CameraControler : MonoBehaviour
         //camera.transform.position = Vector3.Lerp(camera.transform.position, transform.position, 0.5f);
         camera.transform.position = Vector3.SmoothDamp(camera.transform.position, transform.position, ref cameraCatch, cameraCatchSpeed);
         camera.transform.eulerAngles = transform.eulerAngles;
+        //camera.transform.LookAt(cameraHandle.transform);
     }
 }
