@@ -13,6 +13,7 @@ public abstract class IUserInput : MonoBehaviour
 	public bool inputEnable = true;
 	public bool walk;
 	public bool attack;
+    public bool lockon;
 	protected bool lastAttack;
 	protected float targetDup;
 	protected float targetDright;

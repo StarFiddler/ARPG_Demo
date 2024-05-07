@@ -575,6 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   model: {fileID: 994326486}
   pi: {fileID: 374888461}
+  cam: {fileID: 898303857}
   moveSpeed: 2.5
   runMultiple: 2.4
   jumpVec: 4
@@ -604,6 +605,7 @@ MonoBehaviour:
   inputEnable: 1
   walk: 0
   attack: 0
+  lockon: 0
   keyUp: w
   keyDown: s
   keyLeft: a
@@ -612,6 +614,7 @@ MonoBehaviour:
   keyJump: space
   keyDash: left ctrl
   keyAttack1: mouse 0
+  keyLockOn: g
 --- !u!136 &374888462
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2700,6 +2703,10 @@ PrefabInstance:
     - target: {fileID: 842376528896513027, guid: 7d61fd83e7203f64c92fe1ac19605957, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 842376528896513027, guid: 7d61fd83e7203f64c92fe1ac19605957, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 842376528896513049, guid: 7d61fd83e7203f64c92fe1ac19605957, type: 3}
       propertyPath: m_RootOrder

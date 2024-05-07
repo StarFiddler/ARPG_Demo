@@ -1315,7 +1315,7 @@ ModelImporter:
     - name: hand_r
       parentName: lowerarm_r
       position: {x: 0.2712292, y: -0.0013547515, z: 0.0007644081}
-      rotation: {x: -0.6885442, y: -0.08253119, z: -0.012911606, w: 0.72036713}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.9999999}
     - name: index_01_r
       parentName: hand_r
@@ -1395,7 +1395,7 @@ ModelImporter:
     - name: thumb_01_r
       parentName: hand_r
       position: {x: 0.047621496, y: -0.023750534, z: 0.025378188}
-      rotation: {x: 0.8062066, y: -0.4085042, z: -0.11517036, w: 0.41217843}
+      rotation: {x: 0.76739097, y: -0.27526283, z: 0.21177271, w: 0.5389748}
       scale: {x: 0.99999976, y: 1, z: 0.9999999}
     - name: thumb_02_r
       parentName: thumb_01_r
@@ -1475,7 +1475,7 @@ ModelImporter:
     - name: calf_twist_01_l
       parentName: calf_l
       position: {x: 0.20476985, y: -0.00075811386, z: -0.000021457672}
-      rotation: {x: -0.08815933, y: 0.002300562, z: 0.009791093, w: 0.9960556}
+      rotation: {x: -0.08815934, y: 0.002300562, z: 0.009791094, w: 0.9960556}
       scale: {x: 0.9999995, y: 0.9999998, z: 1.0000002}
     - name: foot_l
       parentName: calf_l

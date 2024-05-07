@@ -11,6 +11,7 @@ public class KeyboardInput: IUserInput
 	public string keyJump;
 	public string keyDash;
 	public string keyAttack1;
+	public string keyLockOn;
 	// public float Dup;
 	// public float Dright;
 	// public float Dmag;
@@ -35,6 +36,7 @@ public class KeyboardInput: IUserInput
 		MouseX = Input.GetAxis("Mouse X");
 		MouseY = Input.GetAxis("Mouse Y");
 		walk = Input.GetKey(keyWalk);
+		lockon = Input.GetKeyDown(keyLockOn);//每次按下key后，lockon变为true
 	}
 
 	void FixedUpdate()

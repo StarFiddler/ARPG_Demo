@@ -6,6 +6,7 @@ public class PlayerControl : MonoBehaviour
 {
     public GameObject model;//检索Player对象下挂载的模型
     public KeyboardInput pi;
+    public CameraController cam;
     public float moveSpeed = 2.5f;
     public float runMultiple = 2.4f;
     public float jumpVec = 4.0f;
@@ -50,6 +51,10 @@ public class PlayerControl : MonoBehaviour
         if(Input.GetKeyDown(pi.keyAttack1) && IsGrounded() && canAttack)
         {
             Attack();
+        }
+        if(pi.lockon)
+        {
+            cam.CameraLock();
         }
     }
     // Update is called once per frame
@@ -161,9 +166,9 @@ public class PlayerControl : MonoBehaviour
     public void OnSlash1Update()
     {
         thrustVec = model.transform.forward * ani.GetFloat("Slash1Vec");
-        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("Attack"));
+        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("SwordMode"));
         currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
-        ani.SetLayerWeight(ani.GetLayerIndex("Attack"), currentWeight);
+        ani.SetLayerWeight(ani.GetLayerIndex("SwordMode"), currentWeight);
         _rb.position += thrustVec * Time.fixedDeltaTime;
     }
 
@@ -176,9 +181,9 @@ public class PlayerControl : MonoBehaviour
 
     public void OnSwordIdleUpdate()
     {
-        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("Attack"));
+        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("SwordMode"));
         currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
-        ani.SetLayerWeight(ani.GetLayerIndex("Attack"), currentWeight);
+        ani.SetLayerWeight(ani.GetLayerIndex("SwordMode"), currentWeight);
     }
     
     public void OnUpdateRootMotion(object _dP)
