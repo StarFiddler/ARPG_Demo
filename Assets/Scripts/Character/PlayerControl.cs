@@ -21,6 +21,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 dP;//deltaPositon
     private CapsuleCollider _col;
     private bool lockPlaneVector = false; //bool锁定平面移动向量
+    private bool targetMoveLock = false;//bool在锁定单位时解锁动作方向
     private bool canAttack;
     private float lerpTarget;
     void Awake()
@@ -61,17 +62,41 @@ public class PlayerControl : MonoBehaviour
     void FixedUpdate()
     {
         float targetRunMultiple = ((pi.walk) ? 1.0f : 2.0f);
-        //动画变化速度线性插值
-        ani.SetFloat("forward", pi.Dmag * Mathf.Lerp(ani.GetFloat("forward"), targetRunMultiple, 0.2f));
-        //停止移动时方向校准
-        if(pi.Dmag > 0.1f)
+        if(cam.lockPos == false)
         {
+            //动画变化速度线性插值
+            ani.SetFloat("forward", pi.Dmag * Mathf.Lerp(ani.GetFloat("forward"), targetRunMultiple, 0.2f));
+            //非锁定状态清空横向移动动画
+            ani.SetFloat("right", 0f);
+            //停止移动时方向校准
+            if(pi.Dmag > 0.1f)
+            {
             //角色方向变化球形线性插值
-            model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.3f);
+                model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.3f);
+            }
+            if(lockPlaneVector == false)
+            {
+                _pV = pi.Dmag * model.transform.forward * moveSpeed * ((pi.walk) ? 1.0f : runMultiple);//平面移动速度向量
+            }
         }
-        if(lockPlaneVector == false)
+        else
         {
-            _pV = pi.Dmag * model.transform.forward * moveSpeed * ((pi.walk) ? 1.0f : runMultiple);//平面移动速度向量
+            if(targetMoveLock == false)
+            {
+                model.transform.forward = transform.forward;
+            }
+            else
+            {
+                model.transform.forward = _pV.normalized;
+            }
+            //锁定状态下，动画变化速度线性插值
+            Vector3 localDvec = transform.InverseTransformVector(pi.Dvec);
+            ani.SetFloat("forward", localDvec.z * ((pi.walk) ? 1.0f : runMultiple));
+            ani.SetFloat("right", localDvec.x * ((pi.walk) ? 1.0f : runMultiple));
+            if(lockPlaneVector == false)
+            {
+                _pV = pi.Dvec * moveSpeed * ((pi.walk) ? 1.0f : runMultiple);
+            }
         }
         _rb.position += dP;
         _rb.position += _pV * Time.fixedDeltaTime; //平面移动坐标向量
@@ -87,6 +112,7 @@ public class PlayerControl : MonoBehaviour
         {
             ani.SetBool("IsGround", true);
             canAttack = true;
+            
             /*pi.inputEnable = true;
             lockPlaneVector = false;*/
         }
@@ -125,6 +151,7 @@ public class PlayerControl : MonoBehaviour
         ani.SetTrigger("Dash");
         _rb.velocity += thrustVec;
         thrustVec = Vector3.zero; 
+        targetMoveLock = true;
     }
 
     private void Attack()
@@ -136,12 +163,14 @@ public class PlayerControl : MonoBehaviour
     {
         pi.inputEnable = false;
         lockPlaneVector = true;
+        targetMoveLock = true;
     }
 
     public void OnJumpExit()
     {
         pi.inputEnable = true;
         lockPlaneVector = false;
+        targetMoveLock = false;
     }
 
     public void OnFallEnter()
@@ -154,6 +183,7 @@ public class PlayerControl : MonoBehaviour
     {
         pi.inputEnable = true;
         lockPlaneVector = false;
+        targetMoveLock = false;
     }
 
     public void OnSlash1Enter()

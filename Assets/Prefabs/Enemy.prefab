@@ -11,8 +11,6 @@ GameObject:
   - component: {fileID: 842376528896513049}
   - component: {fileID: 842376528896513048}
   - component: {fileID: 842376528896513055}
-  - component: {fileID: 842376528896513054}
-  - component: {fileID: 842376528896513053}
   - component: {fileID: 842376528896513052}
   - component: {fileID: 8101664501347600451}
   m_Layer: 0
@@ -85,33 +83,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &842376528896513054
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842376528896513027}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!135 &842376528896513053
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 842376528896513027}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 8
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &842376528896513052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,6 +95,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51162dbda8ac09446bacdaf21f6cc217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  patrolRoute: {fileID: 0}
+  locations: []
 --- !u!195 &8101664501347600451
 NavMeshAgent:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CameraController : MonoBehaviour
 {
@@ -8,13 +9,15 @@ public class CameraController : MonoBehaviour
     public float hSpeed = 200.0f;
     public float vSpeed = 100.0f;
     public float cameraCatchSpeed = 0.05f;
+    public Image lockPoint;//锁定UI图像
+    public bool lockPos;//锁定旋转
     private GameObject playerHandle;
     private GameObject cameraHandle;
     private float tempEulerX;
     private GameObject model;
     private GameObject camera;
     private Vector3 cameraCatch;
-    private GameObject lockTarget;//锁定目标
+    private LockTarget lockTarget;//定义一个LockTarget类下的lockTarget变量，该变量有两种类型（obj和halfHeight）
     // Start is called before the first frame update
     void Awake()
     {
@@ -23,11 +26,22 @@ public class CameraController : MonoBehaviour
         tempEulerX = 20;
         model = playerHandle.GetComponent<PlayerControl>().model;
         camera = Camera.main.gameObject;
+        lockPoint.enabled = false;
+        lockPos = false;
     }
 
     void Update()
     {
-
+        if(lockTarget != null)
+        {
+            lockPoint.rectTransform.position = Camera.main.WorldToScreenPoint(lockTarget.obj.transform.position + new Vector3(0, lockTarget.halfHeight, 0));
+            if(Vector3.Distance(model.transform.position, lockTarget.obj.transform.position) > 10.0f)
+            {
+                    lockTarget = null;
+                    lockPoint.enabled = false;
+                    lockPos = false;
+            }
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -46,7 +60,7 @@ public class CameraController : MonoBehaviour
         }
         else
         {
-            Vector3 tempForward = lockTarget.transform.position - model.transform.position;
+            Vector3 tempForward = lockTarget.obj.transform.position - model.transform.position;
             tempForward.y = 0;
             playerHandle.transform.forward = tempForward;
         }
@@ -55,29 +69,46 @@ public class CameraController : MonoBehaviour
         //camera.transform.LookAt(cameraHandle.transform);
     }
 
-    public void CameraLock()
+    public void CameraLock()//视角锁定
     {
-        Vector3 modelOrigin1 = model.transform.position;
-        Vector3 modelOrigin2 = modelOrigin1 + new Vector3(0, 1, 0);
+        Vector3 modelOrigin1 = playerHandle.transform.position;
+        Vector3 modelOrigin2 = modelOrigin1 + new Vector3(0, 0, 0);
         Vector3 boxCenter = modelOrigin2 + model.transform.forward * 5.0f;
-        Collider[] cols = Physics.OverlapBox(boxCenter, new Vector3(0.5f, 0.5f, 5f), model.transform.rotation, LayerMask.GetMask("Enemy"));
+        Collider[] cols = Physics.OverlapBox(boxCenter, new Vector3(1.0f, 5f, 10f), model.transform.rotation, LayerMask.GetMask("Enemy"));
         if(cols.Length == 0)
         {
             lockTarget = null;
+            lockPoint.enabled = false;
+            lockPos = false;
         }
         else
         {
             foreach(var col in cols)
             {
-                if(lockTarget == col.gameObject)
+                if(lockTarget != null && lockTarget.obj == col.gameObject)
                 {
                     lockTarget = null;
+                    lockPoint.enabled = false;
+                    lockPos = false;
                     break;
                 }
-                lockTarget = col.gameObject;
+                lockTarget = new LockTarget(col.gameObject, col.bounds.extents.y);
+                lockPoint.enabled = true;
+                lockPos = true;
                 break;
             }
         }
         
+    }
+
+    private class LockTarget
+    {
+        public GameObject obj;
+        public float halfHeight;
+        public LockTarget(GameObject _obj, float _halfHeight)
+        {
+            obj = _obj;
+            halfHeight = _halfHeight;
+        }
     }
 }
