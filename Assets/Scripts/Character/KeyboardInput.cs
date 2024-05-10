@@ -12,6 +12,10 @@ public class KeyboardInput: IUserInput
 	public string keyDash;
 	public string keyAttack1;
 	public string keyLockOn;
+	public string keySowrdMaster;
+	public string keyGunslinger;
+	public string keyWhip;
+	public string keySamurai;
 	// public float Dup;
 	// public float Dright;
 	// public float Dmag;

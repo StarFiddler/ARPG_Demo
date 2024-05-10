@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviour
     private bool targetMoveLock = false;//bool在锁定单位时解锁动作方向
     private bool canAttack;
     private float lerpTarget;
+    private string battleStyle;
     void Awake()
     {
         pi = GetComponent<KeyboardInput>();//调用PlayerInput脚本
@@ -31,6 +32,7 @@ public class PlayerControl : MonoBehaviour
         //m_ani = gameObject.GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();//调用RidigbodyAPI
         _col = GetComponent<CapsuleCollider>();//调用胶囊碰撞
+        battleStyle = null;
     }
     // Start is called before the first frame update
     void Start()
@@ -56,6 +58,26 @@ public class PlayerControl : MonoBehaviour
         if(pi.lockon)
         {
             cam.CameraLock();
+        }
+        if(Input.GetKey(pi.keySowrdMaster) && battleStyle != "SwordMaster")
+        {
+            battleStyle = "SwordMaster";
+            BattleMode();
+        }
+        if(Input.GetKey(pi.keyGunslinger) && battleStyle != "Gunslinger")
+        {
+            battleStyle = "Gunslinger";
+            BattleMode();
+        }
+        if(Input.GetKey(pi.keyWhip) && battleStyle != "Whip")
+        {
+            battleStyle = "Whip";
+            BattleMode();
+        }
+        if(Input.GetKey(pi.keySamurai) && battleStyle != "Samurai")
+        {
+            battleStyle = "Samurai";
+            BattleMode();
         }
     }
     // Update is called once per frame
@@ -156,7 +178,9 @@ public class PlayerControl : MonoBehaviour
 
     private void Attack()
     {
-        ani.SetTrigger("Slash");
+        ani.SetTrigger("Attack1");
+        //ani.SetBool("SwordMaster", true);
+        
     }
 
     public void OnJumpEnter()
@@ -206,7 +230,7 @@ public class PlayerControl : MonoBehaviour
     {
         pi.inputEnable = true;
         //lockPlaneVector = false;
-        lerpTarget = 0f;
+        lerpTarget = 1.0f;
     }
 
     public void OnSwordIdleUpdate()
@@ -219,5 +243,49 @@ public class PlayerControl : MonoBehaviour
     public void OnUpdateRootMotion(object _dP)
     {
         dP += (Vector3) _dP;
+    }
+
+    public void OnSwordMasterIdleEnter()
+    {
+        pi.inputEnable = true;
+        //lockPlaneVector = false;
+        lerpTarget = 0f;
+    }
+     public void OnSwordMasterIdleUpdate()
+    {
+        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("SwordMode"));
+        currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
+        ani.SetLayerWeight(ani.GetLayerIndex("SwordMode"), currentWeight);
+    }
+
+    private void BattleMode()
+    {
+        switch(battleStyle)
+        {
+            case "SwordMaster":
+            ani.SetBool("SwordMaster", true);
+            ani.SetBool("Gunslinger", false);
+            ani.SetBool("Whip", false);
+            ani.SetBool("Samurai", false);
+            break;
+            case "Gunslinger":
+            ani.SetBool("SwordMaster", false);
+            ani.SetBool("Gunslinger", true);
+            ani.SetBool("Whip", false);
+            ani.SetBool("Samurai", false);
+            break;
+            case "Whip":
+            ani.SetBool("SwordMaster", false);
+            ani.SetBool("Gunslinger", false);
+            ani.SetBool("Whip", true);
+            ani.SetBool("Samurai", false);
+            break;
+            case "Samurai":
+            ani.SetBool("SwordMaster", false);
+            ani.SetBool("Gunslinger", false);
+            ani.SetBool("Whip", false);
+            ani.SetBool("Samurai", true);
+            break;
+        }
     }
 }
