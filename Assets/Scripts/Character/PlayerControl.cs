@@ -59,24 +59,24 @@ public class PlayerControl : MonoBehaviour
         {
             cam.CameraLock();
         }
-        if(Input.GetKey(pi.keySowrdMaster) && battleStyle != "SwordMaster")
+        if(Input.GetKey(pi.keySowrdMaster) && battleStyle != "SwordMasterMode")
         {
-            battleStyle = "SwordMaster";
+            battleStyle = "SwordMasterMode";
             BattleMode();
         }
-        if(Input.GetKey(pi.keyGunslinger) && battleStyle != "Gunslinger")
+        if(Input.GetKey(pi.keyGunslinger) && battleStyle != "GunslingerMode")
         {
-            battleStyle = "Gunslinger";
+            battleStyle = "GunslingerMode";
             BattleMode();
         }
-        if(Input.GetKey(pi.keyWhip) && battleStyle != "Whip")
+        if(Input.GetKey(pi.keyWhip) && battleStyle != "WhipMode")
         {
-            battleStyle = "Whip";
+            battleStyle = "WhipMode";
             BattleMode();
         }
-        if(Input.GetKey(pi.keySamurai) && battleStyle != "Samurai")
+        if(Input.GetKey(pi.keySamurai) && battleStyle != "SamuraiMode")
         {
-            battleStyle = "Samurai";
+            battleStyle = "SamuraiMode";
             BattleMode();
         }
     }
@@ -213,74 +213,144 @@ public class PlayerControl : MonoBehaviour
     public void OnSlash1Enter()
     {
         pi.inputEnable = false;
-        //lockPlaneVector = true;
-        lerpTarget = 1.0f;
     }
 
     public void OnSlash1Update()
     {
         thrustVec = model.transform.forward * ani.GetFloat("Slash1Vec");
-        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("SwordMode"));
-        currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
-        ani.SetLayerWeight(ani.GetLayerIndex("SwordMode"), currentWeight);
         _rb.position += thrustVec * Time.fixedDeltaTime;
     }
 
-    public void OnSwordIdleEnter()
+    /*public void OnSwordMasterIdleEnter()
     {
         pi.inputEnable = true;
         //lockPlaneVector = false;
         lerpTarget = 1.0f;
     }
 
-    public void OnSwordIdleUpdate()
+    public void OnSwordMasterIdleUpdate()
     {
-        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("SwordMode"));
+        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode"));
         currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
-        ani.SetLayerWeight(ani.GetLayerIndex("SwordMode"), currentWeight);
-    }
+        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), currentWeight);
+        print("SM");
+    }*/
     
     public void OnUpdateRootMotion(object _dP)
     {
         dP += (Vector3) _dP;
     }
 
-    public void OnSwordMasterIdleEnter()
+    /*public void OnNormalIdleEnter()
     {
         pi.inputEnable = true;
         //lockPlaneVector = false;
         lerpTarget = 0f;
     }
-     public void OnSwordMasterIdleUpdate()
+     public void OnNormalIdleUpdate()
     {
-        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("SwordMode"));
+        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode"));
         currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
-        ani.SetLayerWeight(ani.GetLayerIndex("SwordMode"), currentWeight);
+        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), currentWeight);
+    }
+
+    public void OnGunslingerIdleEnter()
+    {
+        pi.inputEnable = true;
+        //lockPlaneVector = false;
+        lerpTarget = 1.0f;
+    }
+
+    public void OnGunslingerIdleUpdate()
+    {
+        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex(battleStyle));
+        currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
+        ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), currentWeight);
+        print("GM");
+    }*/
+
+    public void OnNormalModeEnter()
+    {
+        pi.inputEnable = true;
+        lerpTarget = 0f;
+    }
+
+    public void OnNormalModeUpdate()
+    {
+        /*float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex(battleStyle));
+        currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
+        ani.SetLayerWeight(ani.GetLayerIndex(battleStyle), currentWeight);*/
+        if(ani.GetBool("SwordMaster"))
+        {
+        //ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
+        ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
+        ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
+        ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
+        //print("SM");
+        }
+        if(ani.GetBool("Gunslinger"))
+        {
+        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
+        //ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
+        ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
+        ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
+        //print("GS");
+        }
+        if(ani.GetBool("Whip"))
+        {
+        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
+        ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
+        //ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
+        ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
+        }
+        if(ani.GetBool("Samurai"))
+        {
+        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
+        ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
+        ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
+        //ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
+        }
+    }
+    public void OnBattleModeEnter()
+    {
+        pi.inputEnable = true;
+        lerpTarget = 1.0f;
+    }
+
+    public void OnBattleModeUpdate()
+    {
+        //float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex(battleStyle));
+        //currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
+        float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex(battleStyle));
+        currentWeight = Mathf.Lerp(currentWeight, 1.0f, 0.1f);
+        ani.SetLayerWeight(ani.GetLayerIndex(battleStyle), currentWeight);
+        //print(battleStyle);
+        //print(currentWeight);
     }
 
     private void BattleMode()
     {
         switch(battleStyle)
         {
-            case "SwordMaster":
+            case "SwordMasterMode":
             ani.SetBool("SwordMaster", true);
             ani.SetBool("Gunslinger", false);
             ani.SetBool("Whip", false);
             ani.SetBool("Samurai", false);
             break;
-            case "Gunslinger":
+            case "GunslingerMode":
             ani.SetBool("SwordMaster", false);
             ani.SetBool("Gunslinger", true);
             ani.SetBool("Whip", false);
             ani.SetBool("Samurai", false);
             break;
-            case "Whip":
+            case "WhipMode":
             ani.SetBool("SwordMaster", false);
             ani.SetBool("Gunslinger", false);
             ani.SetBool("Whip", true);
             ani.SetBool("Samurai", false);
             break;
-            case "Samurai":
+            case "SamuraiMode":
             ani.SetBool("SwordMaster", false);
             ani.SetBool("Gunslinger", false);
             ani.SetBool("Whip", false);
