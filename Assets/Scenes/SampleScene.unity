@@ -841,6 +841,7 @@ MonoBehaviour:
   keyGunslinger: 2
   keyWhip: 3
   keySamurai: 4
+  keySheath: left shift
 --- !u!136 &374888462
 CapsuleCollider:
   m_ObjectHideFlags: 0

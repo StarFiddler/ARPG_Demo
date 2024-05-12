@@ -53,7 +53,11 @@ public class PlayerControl : MonoBehaviour
         }
         if(Input.GetKeyDown(pi.keyAttack1) && IsGrounded() && canAttack)
         {
-            Attack();
+            Attack1();
+        }
+        if(Input.GetKeyDown(pi.keyAttack2) && IsGrounded() && canAttack)
+        {
+            Attack2();
         }
         if(pi.lockon)
         {
@@ -79,6 +83,11 @@ public class PlayerControl : MonoBehaviour
             battleStyle = "SamuraiMode";
             BattleMode();
         }
+        if(Input.GetKey(pi.keySheath))
+        {
+            battleStyle = "Sheath";
+            BattleMode();
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -96,6 +105,10 @@ public class PlayerControl : MonoBehaviour
             //角色方向变化球形线性插值
                 model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.3f);
             }
+            else
+            {
+                model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.3f);
+            }
             if(lockPlaneVector == false)
             {
                 _pV = pi.Dmag * model.transform.forward * moveSpeed * ((pi.walk) ? 1.0f : runMultiple);//平面移动速度向量
@@ -105,11 +118,12 @@ public class PlayerControl : MonoBehaviour
         {
             if(targetMoveLock == false)
             {
-                model.transform.forward = transform.forward;
+                model.transform.forward = pi.Dvec;
             }
             else
             {
                 model.transform.forward = _pV.normalized;
+                //model.transform.forward = Vector3.Slerp(model.transform.forward, pi.Dvec, 0.3f);
             }
             //锁定状态下，动画变化速度线性插值
             Vector3 localDvec = transform.InverseTransformVector(pi.Dvec);
@@ -176,11 +190,16 @@ public class PlayerControl : MonoBehaviour
         targetMoveLock = true;
     }
 
-    private void Attack()
+    private void Attack1()
     {
         ani.SetTrigger("Attack1");
         //ani.SetBool("SwordMaster", true);
         
+    }
+
+    private void Attack2()
+    {
+        ani.SetTrigger("Attack2");
     }
 
     public void OnJumpEnter()
@@ -328,6 +347,11 @@ public class PlayerControl : MonoBehaviour
         //print(currentWeight);
     }
 
+    public void OnBattleModeExit()
+    {
+        Sheath();
+    }
+
     private void BattleMode()
     {
         switch(battleStyle)
@@ -356,6 +380,21 @@ public class PlayerControl : MonoBehaviour
             ani.SetBool("Whip", false);
             ani.SetBool("Samurai", true);
             break;
+            case "Sheath":
+            ani.SetBool("SwordMaster", false);
+            ani.SetBool("Gunslinger", false);
+            ani.SetBool("Whip", false);
+            ani.SetBool("Samurai", false);
+            break;
         }
+    }
+
+    private void Sheath()//收刀后清空所有战斗图层权重
+    {
+        pi.inputEnable = true;
+        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 1.0f));
+        ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 1.0f));
+        ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 1.0f));
+        ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 1.0f));
     }
 }
