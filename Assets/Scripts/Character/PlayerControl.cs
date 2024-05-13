@@ -23,8 +23,8 @@ public class PlayerControl : MonoBehaviour
     private bool lockPlaneVector = false; //bool锁定平面移动向量
     private bool targetMoveLock = false;//bool在锁定单位时解锁动作方向
     private bool canAttack;
-    private float lerpTarget;
     private string battleStyle;
+    private int i = 0;//武士道风格架势变量
     void Awake()
     {
         pi = GetComponent<KeyboardInput>();//调用PlayerInput脚本
@@ -51,11 +51,11 @@ public class PlayerControl : MonoBehaviour
         {
             Dash();
         }
-        if(Input.GetKeyDown(pi.keyAttack1) && IsGrounded() && canAttack)
+        if(Input.GetKeyDown(pi.keyAttack1) && (IsGrounded() || canAttack))
         {
             Attack1();
         }
-        if(Input.GetKeyDown(pi.keyAttack2) && IsGrounded() && canAttack)
+        if(Input.GetKeyDown(pi.keyAttack2) && (IsGrounded() || canAttack))
         {
             Attack2();
         }
@@ -63,24 +63,24 @@ public class PlayerControl : MonoBehaviour
         {
             cam.CameraLock();
         }
-        if(Input.GetKey(pi.keySowrdMaster) && battleStyle != "SwordMasterMode")
+        if(Input.GetKey(pi.keySowrdMaster))
         {
-            battleStyle = "SwordMasterMode";
+            battleStyle = "SwordMaster";
             BattleMode();
         }
-        if(Input.GetKey(pi.keyGunslinger) && battleStyle != "GunslingerMode")
+        if(Input.GetKey(pi.keyGunslinger) && battleStyle != "Gunslinger")
         {
-            battleStyle = "GunslingerMode";
+            battleStyle = "Gunslinger";
             BattleMode();
         }
-        if(Input.GetKey(pi.keyWhip) && battleStyle != "WhipMode")
+        if(Input.GetKey(pi.keyWhip) && battleStyle != "Whip")
         {
-            battleStyle = "WhipMode";
+            battleStyle = "Whip";
             BattleMode();
         }
-        if(Input.GetKey(pi.keySamurai) && battleStyle != "SamuraiMode")
+        if(Input.GetKey(pi.keySamurai) && battleStyle != "Samurai")
         {
-            battleStyle = "SamuraiMode";
+            battleStyle = "Samurai";
             BattleMode();
         }
         if(Input.GetKey(pi.keySheath))
@@ -199,7 +199,20 @@ public class PlayerControl : MonoBehaviour
 
     private void Attack2()
     {
-        ani.SetTrigger("Attack2");
+        if(battleStyle != "Samurai")
+        {
+            ani.SetTrigger("Attack2");
+        }
+        else
+        {
+            i++ ;
+            print(i);
+            ani.SetInteger("SamuraiPosture", i);
+            if(i == 2)
+            {
+                i = -1;
+            }
+        }
     }
 
     public void OnJumpEnter()
@@ -291,49 +304,56 @@ public class PlayerControl : MonoBehaviour
     public void OnNormalModeEnter()
     {
         pi.inputEnable = true;
-        lerpTarget = 0f;
     }
 
-    public void OnNormalModeUpdate()
+    public void OnNormalModeUpdate()//切换战斗风格时，清空当前战斗风格以外的风格权重
     {
         /*float currentWeight = ani.GetLayerWeight(ani.GetLayerIndex(battleStyle));
         currentWeight = Mathf.Lerp(currentWeight, lerpTarget, 0.1f);
         ani.SetLayerWeight(ani.GetLayerIndex(battleStyle), currentWeight);*/
-        if(ani.GetBool("SwordMaster"))
+        //if(ani.GetBool("SwordMaster") || ani.GetBool("Gunslinger") || ani.GetBool("Whip") || ani.GetBool("Samurai"))
+        if(ani.GetBool(battleStyle))
         {
+            int j = ani.layerCount;
+            for(int a = 0; a < ani.layerCount; a++)
+            {
+                if(a != ani.GetLayerIndex(battleStyle))
+                {
+                    ani.SetLayerWeight(a, Mathf.Lerp(ani.GetLayerWeight(a), 0, 0.1f));
+                }
+            }
         //ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
-        ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
-        ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
-        ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
         //print("SM");
         }
-        if(ani.GetBool("Gunslinger"))
-        {
-        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
-        //ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
-        ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
-        ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
-        //print("GS");
-        }
-        if(ani.GetBool("Whip"))
-        {
-        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
-        ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
-        //ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
-        ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
-        }
-        if(ani.GetBool("Samurai"))
-        {
-        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
-        ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
-        ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
-        //ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
-        }
+        // if(ani.GetBool("Gunslinger"))
+        // {
+        // ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
+        // //ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
+        // //print("GS");
+        // }
+        // if(ani.GetBool("Whip"))
+        // {
+        // ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
+        // //ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
+        // }
+        // if(ani.GetBool("Samurai"))
+        // {
+        // ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 0.1f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 0.1f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 0.1f));
+        // //ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 0.1f));
+        // }
     }
     public void OnBattleModeEnter()
     {
         pi.inputEnable = true;
-        lerpTarget = 1.0f;
     }
 
     public void OnBattleModeUpdate()
@@ -356,25 +376,25 @@ public class PlayerControl : MonoBehaviour
     {
         switch(battleStyle)
         {
-            case "SwordMasterMode":
+            case "SwordMaster":
             ani.SetBool("SwordMaster", true);
             ani.SetBool("Gunslinger", false);
             ani.SetBool("Whip", false);
             ani.SetBool("Samurai", false);
             break;
-            case "GunslingerMode":
+            case "Gunslinger":
             ani.SetBool("SwordMaster", false);
             ani.SetBool("Gunslinger", true);
             ani.SetBool("Whip", false);
             ani.SetBool("Samurai", false);
             break;
-            case "WhipMode":
+            case "Whip":
             ani.SetBool("SwordMaster", false);
             ani.SetBool("Gunslinger", false);
             ani.SetBool("Whip", true);
             ani.SetBool("Samurai", false);
             break;
-            case "SamuraiMode":
+            case "Samurai":
             ani.SetBool("SwordMaster", false);
             ani.SetBool("Gunslinger", false);
             ani.SetBool("Whip", false);
@@ -392,9 +412,14 @@ public class PlayerControl : MonoBehaviour
     private void Sheath()//收刀后清空所有战斗图层权重
     {
         pi.inputEnable = true;
-        ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 1.0f));
-        ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 1.0f));
-        ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 1.0f));
-        ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 1.0f));
+        int j = ani.layerCount;
+        for(int a = 0; a < j; a++)
+        {
+            ani.SetLayerWeight(a, 0);
+        }
+        // ani.SetLayerWeight(ani.GetLayerIndex("SwordMasterMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SwordMasterMode")), 0, 1.0f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("GunslingerMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("GunslingerMode")), 0, 1.0f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("WhipMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("WhipMode")), 0, 1.0f));
+        // ani.SetLayerWeight(ani.GetLayerIndex("SamuraiMode"), Mathf.Lerp(ani.GetLayerWeight(ani.GetLayerIndex("SamuraiMode")), 0, 1.0f));
     }
 }
