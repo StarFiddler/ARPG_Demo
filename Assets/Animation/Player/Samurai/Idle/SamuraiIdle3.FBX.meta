@@ -517,7 +517,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -1252,12 +1252,12 @@ ModelImporter:
     - name: upperarm_l
       parentName: clavicle_l
       position: {x: -0.15841308, y: -0.00050186156, z: 0.00023216246}
-      rotation: {x: 0, y: 0, z: 0.06975647, w: 0.9975641}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 0.9999997}
     - name: lowerarm_l
       parentName: upperarm_l
       position: {x: -0.3036698, y: 0.0013542175, z: -0.0004193878}
-      rotation: {x: 0.0014754492, y: 0.016864453, z: 0.0871433, w: 0.9960519}
+      rotation: {x: 0, y: 0.016928874, z: 0, w: 0.99985677}
       scale: {x: 1.0000004, y: 1.0000002, z: 0.9999999}
     - name: hand_l
       parentName: lowerarm_l
@@ -1362,12 +1362,12 @@ ModelImporter:
     - name: upperarm_r
       parentName: clavicle_r
       position: {x: 0.15843767, y: 0.00058151246, z: -0.0002531433}
-      rotation: {x: 0, y: 0, z: 0.06975647, w: 0.9975641}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000004, y: 1.0000002, z: 0.99999964}
     - name: lowerarm_r
       parentName: upperarm_r
       position: {x: 0.30373108, y: -0.0014234161, z: 0.000440464}
-      rotation: {x: 0, y: 0, z: 0.08715578, w: 0.9961947}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 0.99999994, y: 0.9999998, z: 1.0000002}
     - name: hand_r
       parentName: lowerarm_r

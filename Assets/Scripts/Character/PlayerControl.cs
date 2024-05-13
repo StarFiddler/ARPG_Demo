@@ -88,6 +88,10 @@ public class PlayerControl : MonoBehaviour
             battleStyle = "Sheath";
             BattleMode();
         }
+        if(Resources.Load<GameObject>("Models/Weapons/RedSakura/RedSakura") == null)
+        {
+            print("TRUE");
+        }
     }
     // Update is called once per frame
     void FixedUpdate()
@@ -197,13 +201,13 @@ public class PlayerControl : MonoBehaviour
         
     }
 
-    private void Attack2()
+    private void Attack2()//右键攻击触发器
     {
         if(battleStyle != "Samurai")
         {
             ani.SetTrigger("Attack2");
         }
-        else
+        else//武士道风格下，右键作为架势切换键
         {
             i++ ;
             print(i);
@@ -372,7 +376,7 @@ public class PlayerControl : MonoBehaviour
         Sheath();
     }
 
-    private void BattleMode()
+    private void BattleMode()//战斗风格切换
     {
         switch(battleStyle)
         {
