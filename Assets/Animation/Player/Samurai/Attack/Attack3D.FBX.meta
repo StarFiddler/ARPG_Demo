@@ -1282,13 +1282,13 @@ ModelImporter:
       scale: {x: 1.0000004, y: 1.0000004, z: 1.0000002}
     - name: upperarm_l
       parentName: clavicle_l
-      position: {x: -0.15841308, y: -0.0005019379, z: 0.00023216246}
-      rotation: {x: 0, y: 0, z: 0.06975647, w: 0.9975641}
-      scale: {x: 1.0000001, y: 0.99999994, z: 0.9999997}
+      position: {x: -0.15841308, y: -0.00050186156, z: 0.00023216246}
+      rotation: {x: -0.04684608, y: -0.21130902, z: 0.2113091, w: 0.9531539}
+      scale: {x: 1, y: 1, z: 0.9999997}
     - name: lowerarm_l
       parentName: upperarm_l
       position: {x: -0.30366972, y: 0.0013542938, z: -0.00041942595}
-      rotation: {x: 0, y: 0, z: 0.08715578, w: 0.9961947}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1.0000004, y: 1.0000002, z: 0.9999998}
     - name: hand_l
       parentName: lowerarm_l
@@ -1368,7 +1368,7 @@ ModelImporter:
     - name: thumb_02_l
       parentName: thumb_01_l
       position: {x: -0.038696583, y: 0.0000029182434, z: -0.000000076293944}
-      rotation: {x: 0.008889437, y: -0.013723461, z: -0.026534377, w: 0.99951416}
+      rotation: {x: 0.00888944, y: -0.013723461, z: -0.026534384, w: 0.99951416}
       scale: {x: 1.0000002, y: 1.0000005, z: 1.0000004}
     - name: thumb_03_l
       parentName: thumb_02_l
@@ -1393,17 +1393,17 @@ ModelImporter:
     - name: upperarm_r
       parentName: clavicle_r
       position: {x: 0.15843767, y: 0.00058151246, z: -0.0002531433}
-      rotation: {x: 0, y: 0, z: 0.06975647, w: 0.9975641}
+      rotation: {x: 0, y: -0.17364825, z: 0, w: 0.9848078}
       scale: {x: 1.0000004, y: 1.0000001, z: 0.99999964}
     - name: lowerarm_r
       parentName: upperarm_r
       position: {x: 0.30373108, y: -0.001423378, z: 0.000440464}
-      rotation: {x: 0, y: 0, z: 0.08715578, w: 0.9961947}
+      rotation: {x: 0.030153716, y: -0.17101014, z: -0.17101017, w: 0.96984625}
       scale: {x: 1.0000001, y: 0.9999999, z: 1.0000004}
     - name: hand_r
       parentName: lowerarm_r
-      position: {x: 0.26695898, y: 0.0062411497, z: 0.0031513977}
-      rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+      position: {x: 0.26698363, y: 0.0062447204, z: 0.0031289288}
+      rotation: {x: -0.7351405, y: 0.09720793, z: -0.12485262, w: 0.65918964}
       scale: {x: 1, y: 0.9999999, z: 1.0000001}
     - name: index_01_r
       parentName: hand_r

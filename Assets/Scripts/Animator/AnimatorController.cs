@@ -9,6 +9,7 @@ public class AnimatorController : MonoBehaviour
     private Animator ani;
     private Vector3 thrustVec;
     private Rigidbody _rb;
+    private WeaponManager wm;
     // Start is called before the first frame update
     void Awake()
     {
@@ -16,6 +17,7 @@ public class AnimatorController : MonoBehaviour
        ani = model.GetComponent<Animator>();
        _rb = GetComponentInParent<Rigidbody>();
        thrustVec = Vector3.zero;
+       wm = GetComponent<WeaponManager>();
     }
 
     // Update is called once per frame
@@ -30,5 +32,20 @@ public class AnimatorController : MonoBehaviour
         ani.SetBool("IsGround", false);
         _rb.velocity += thrustVec;
         thrustVec = Vector3.zero; 
+    }
+
+    void DrawBlade()
+    {
+        GameObject.Find("WeaponHandle").SendMessage("SwitchWeapon", SendMessageOptions.DontRequireReceiver);
+    }
+
+    void WakeUpWeapon()
+    {
+        GameObject.Find("PropsHandle").SendMessage("WakeUpWeapon", SendMessageOptions.DontRequireReceiver);
+    }
+
+    void SheathWeapon()
+    {
+        GameObject.Find("PropsHandle").SendMessage("SheathWeapon", SendMessageOptions.DontRequireReceiver);
     }
 }

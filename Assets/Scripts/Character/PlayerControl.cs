@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public GameObject model;//检索Player对象下挂载的模型
+    public GameObject model;//Player对象下挂载的模型链接到 GameObject
     public KeyboardInput pi;
     public CameraController cam;
     public float moveSpeed = 2.5f;
@@ -13,6 +13,7 @@ public class PlayerControl : MonoBehaviour
     public float distanceToGround = 0.1f;
     public LayerMask groundLayer;
     [SerializeField]
+    private WeaponManager wm;
     private Animator ani;
     //private Animator m_ani;
     private Rigidbody _rb;
@@ -23,7 +24,7 @@ public class PlayerControl : MonoBehaviour
     private bool lockPlaneVector = false; //bool锁定平面移动向量
     private bool targetMoveLock = false;//bool在锁定单位时解锁动作方向
     private bool canAttack;
-    private string battleStyle;
+    public string battleStyle;
     private int i = 0;//武士道风格架势变量
     void Awake()
     {
@@ -33,6 +34,7 @@ public class PlayerControl : MonoBehaviour
         _rb = GetComponent<Rigidbody>();//调用RidigbodyAPI
         _col = GetComponent<CapsuleCollider>();//调用胶囊碰撞
         battleStyle = null;
+        wm = GetComponent<WeaponManager>();
     }
     // Start is called before the first frame update
     void Start()
@@ -67,30 +69,31 @@ public class PlayerControl : MonoBehaviour
         {
             battleStyle = "SwordMaster";
             BattleMode();
+            //GameObject.Find("WeaponHandle").SendMessage("SwitchWeapon", SendMessageOptions.DontRequireReceiver);
         }
         if(Input.GetKey(pi.keyGunslinger) && battleStyle != "Gunslinger")
         {
             battleStyle = "Gunslinger";
             BattleMode();
+            //GameObject.Find("WeaponHandle").SendMessage("SwitchWeapon", SendMessageOptions.DontRequireReceiver);
         }
         if(Input.GetKey(pi.keyWhip) && battleStyle != "Whip")
         {
             battleStyle = "Whip";
             BattleMode();
+            //GameObject.Find("WeaponHandle").SendMessage("SwitchWeapon", SendMessageOptions.DontRequireReceiver);
         }
         if(Input.GetKey(pi.keySamurai) && battleStyle != "Samurai")
         {
             battleStyle = "Samurai";
             BattleMode();
+            //GameObject.Find("WeaponHandle").SendMessage("SwitchWeapon", SendMessageOptions.DontRequireReceiver);
         }
         if(Input.GetKey(pi.keySheath))
         {
             battleStyle = "Sheath";
             BattleMode();
-        }
-        if(Resources.Load<GameObject>("Models/Weapons/RedSakura/RedSakura") == null)
-        {
-            print("TRUE");
+            //GameObject.Find("WeaponHandle").SendMessage("SwitchWeapon", SendMessageOptions.DontRequireReceiver);
         }
     }
     // Update is called once per frame
@@ -308,6 +311,7 @@ public class PlayerControl : MonoBehaviour
     public void OnNormalModeEnter()
     {
         pi.inputEnable = true;
+        ani.SetInteger("SamuraiPosture", 0);
     }
 
     public void OnNormalModeUpdate()//切换战斗风格时，清空当前战斗风格以外的风格权重

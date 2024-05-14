@@ -1,7 +1,7 @@
 fileFormatVersion: 2
 guid: e999fc72028838d4f9c4582a1fd15388
 ModelImporter:
-  serializedVersion: 21202
+  serializedVersion: 20200
   internalIDToNameTable:
   - first:
       1: 100000
@@ -554,7 +554,6 @@ ModelImporter:
     bakeSimulation: 0
     resampleCurves: 1
     optimizeGameObjects: 0
-    removeConstantScaleCurves: 0
     motionNodeName: root
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
@@ -628,7 +627,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.15280378
+        functionName: SheathWeapon
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ebf229797f02e484d9d1a1a428100738, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.17785898
+        functionName: DrawBlade
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ebf229797f02e484d9d1a1a428100738, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1
@@ -837,7 +850,6 @@ ModelImporter:
     importBlendShapes: 1
     importCameras: 1
     importLights: 1
-    nodeNameCollisionStrategy: 0
     fileIdsGeneration: 1
     swapUVChannels: 0
     generateSecondaryUV: 0
@@ -849,7 +861,6 @@ ModelImporter:
     skinWeightsMode: 0
     maxBonesPerVertex: 4
     minBoneWeight: 0.001
-    optimizeBones: 1
     meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
@@ -1368,8 +1379,7 @@ ModelImporter:
     - name: ik_hand_r
       parentName: ik_hand_gun
       position: {x: -0, y: 0, z: -0.000000019073486}
-      rotation: {x: 0.000000014901159, y: -0.000000022351744, z: 0.000000014901163,
-        w: 1}
+      rotation: {x: 0.000000014901159, y: -0.000000022351744, z: 0.000000014901163, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: M82_Root
       parentName: ik_hand_r
@@ -1474,8 +1484,7 @@ ModelImporter:
     - name: lowerarm_twist_01_l
       parentName: lowerarm_l
       position: {x: -0.14000021, y: 0.000000019073486, z: 0.00000015258789}
-      rotation: {x: 0.000000014901161, y: -0.000000014901161, z: 0.000000014901161,
-        w: 1}
+      rotation: {x: 0.000000014901161, y: -0.000000014901161, z: 0.000000014901161, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: hand_l
       parentName: lowerarm_l
@@ -1755,8 +1764,7 @@ ModelImporter:
     - name: FX_Gunshot_Light
       parentName: FX_Gunfire_Bone
       position: {x: 0.12306832, y: 0.00000008106232, z: 0.00000030457971}
-      rotation: {x: -0.0000000037252903, y: 3.4924638e-10, z: 0.0000000033020204,
-        w: 1}
+      rotation: {x: -0.0000000037252903, y: 3.4924638e-10, z: 0.0000000033020204, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: ShotGun
       parentName: Frank_Gunslinger_Skin(Clone)
@@ -1785,8 +1793,7 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 4c89d8affd612674b9c238ff8651667e,
-    type: 3}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 4c89d8affd612674b9c238ff8651667e, type: 3}
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
