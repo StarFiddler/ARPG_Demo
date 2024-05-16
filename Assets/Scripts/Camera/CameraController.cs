@@ -8,7 +8,7 @@ public class CameraController : MonoBehaviour
     public KeyboardInput pi;
     public float hSpeed = 200.0f;
     public float vSpeed = 100.0f;
-    public float cameraCatchSpeed = 0.05f;
+    public float cameraCatchSpeed = 0.2f;
     public Image lockPoint;//锁定UI图像
     public bool lockPos;//锁定旋转
     private GameObject playerHandle;

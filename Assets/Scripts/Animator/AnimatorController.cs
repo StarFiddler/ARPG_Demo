@@ -5,6 +5,7 @@ using UnityEngine;
 public class AnimatorController : MonoBehaviour
 {
     public GameObject model;
+    public GameObject SlashEffect;
     public PlayerControl Pc;
     private Animator ani;
     private Vector3 thrustVec;
@@ -47,5 +48,10 @@ public class AnimatorController : MonoBehaviour
     void SheathWeapon()
     {
         GameObject.Find("PropsHandle").SendMessage("SheathWeapon", SendMessageOptions.DontRequireReceiver);
+    }
+
+    void Effect()
+    {
+        GameObject.Instantiate(SlashEffect, _rb.position + new Vector3(0,1,0), Quaternion.Euler(90, 0, 0));
     }
 }

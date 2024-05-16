@@ -125,7 +125,8 @@ public class PlayerControl : MonoBehaviour
         {
             if(targetMoveLock == false)
             {
-                model.transform.forward = pi.Dvec;
+                model.transform.forward = transform.forward;
+                //model.transform.forward = pi.Dvec;
             }
             else
             {
