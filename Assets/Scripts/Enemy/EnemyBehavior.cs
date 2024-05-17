@@ -11,6 +11,9 @@ public class EnemyBehavior : MonoBehaviour
     public List<Transform> locations;
     private int locationIndex = 0;
     private Animator ani;
+    private Rigidbody _rb;
+    private float dist;//距离玩家单位的距离
+    private Vector3 dirt;//距离玩家的方向
     private NavMeshAgent agent;
     private int _lives = 3;
     private float enemyWalkSpeed = 2.0f;
@@ -32,6 +35,7 @@ public class EnemyBehavior : MonoBehaviour
     }
     void Start()
     {
+        _rb = model.GetComponentInParent<Rigidbody>();
         ani = model.GetComponent<Animator>();
         findPlayer = false;
         agent = GetComponent<NavMeshAgent>();
@@ -39,15 +43,28 @@ public class EnemyBehavior : MonoBehaviour
         InitializePatrolRoute();
         MoveToNextPatrolLocation();
         GetComponent<NavMeshAgent>().speed = enemyWalkSpeed;
+        //dist = Vector3.Distance(_rb.position, player.position);
     }
     void Update()
     {
+        dist = Vector3.Distance(_rb.position, player.position);
+        dirt = (player.position - _rb.position) / dist;
         float targetRunMultiple = (findPlayer ? 2.0f : 1.0f);
         ani.SetFloat("forward", Mathf.Lerp(ani.GetFloat("forward"), targetRunMultiple, 0.2f));
-        if(agent.remainingDistance < 0.2f && !agent.pathPending)
+        if(findPlayer)
+        {
+            MoveToPlayer();
+        }
+        if(agent.remainingDistance < 0.2f && !agent.pathPending &&!findPlayer)
         {
             MoveToNextPatrolLocation();
         }
+        /*if(findPlayer)
+        {
+            //_pV = enemyRunSpeed * (findPlayer ? 2.0f : 1.0f);
+            
+            _rb.position += dirt * enemyRunSpeed * (findPlayer ? 2.0f : 1.0f) * Time.deltaTime;
+        }*/
     }
     void InitializePatrolRoute()
     {
@@ -57,6 +74,14 @@ public class EnemyBehavior : MonoBehaviour
         }
     }
     void MoveToNextPatrolLocation()
+    {
+        if (locations.Count == 0)
+        return;
+        agent.destination = locations[locationIndex].position;
+        locationIndex = (locationIndex + 1) % locations.Count;
+    }
+    
+    void MoveToPlayer()
     {
         if (locations.Count == 0)
         return;
