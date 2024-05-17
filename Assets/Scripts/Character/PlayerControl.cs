@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public GameObject model;//Player对象下挂载的模型链接到 GameObject
+    public GameObject model;
     public KeyboardInput pi;
     public CameraController cam;
     public float moveSpeed = 2.5f;

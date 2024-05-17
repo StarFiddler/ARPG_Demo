@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4709625738999708406}
   - component: {fileID: 4709625738999708409}
   - component: {fileID: 4709625738999708408}
-  m_Layer: 0
+  - component: {fileID: 2143220006184826462}
+  m_Layer: 10
   m_Name: SlashEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,7 +27,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4709625738999708411}
-  m_LocalRotation: {x: -0.25650957, y: 0.65894073, z: -0.65894073, w: -0.25650957}
+  m_LocalRotation: {x: -0.3992318, y: 0.58362144, z: -0.58362144, w: -0.3992318}
   m_LocalPosition: {x: 0, y: 1.5, z: -1}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_Children: []
@@ -4882,3 +4883,17 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &2143220006184826462
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4709625738999708411}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 760207555604313364, guid: 2a3f5c2482411b844baef4bbf5379c8b, type: 3}
