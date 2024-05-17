@@ -6,6 +6,8 @@ public class AnimatorController : MonoBehaviour
 {
     public GameObject model;
     public GameObject SlashEffect;
+    /*public GameObject SlashEffect_9t4;
+    public GameObject SlashEffect_7t6;*/
     public PlayerControl Pc;
     private Animator ani;
     private Vector3 thrustVec;
@@ -50,8 +52,52 @@ public class AnimatorController : MonoBehaviour
         GameObject.Find("PropsHandle").SendMessage("SheathWeapon", SendMessageOptions.DontRequireReceiver);
     }
 
-    void Effect()
+    void Effect4t6()
     {
-        GameObject.Instantiate(SlashEffect, _rb.position + new Vector3(0,1,0), Quaternion.Euler(90, 0, 0));
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(90, 0, 0));
+    }
+    void Effect6t4()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(90, 180, 0));
+    }
+    void Effect7t6()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(-65, 90, 90));
+    }
+    void Effect6t7()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(65, -90, -90));
+    }
+    void Effect9t4()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(65, 90, 0));
+    }
+    void Effect4t9()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(-65, -90, 0));
+    }
+    void Effect1t9()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(45, 90, 0));
+    }
+    void Effect9t1()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(-45, -90, 0));
+    }
+    void Effect8t2()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(180, 90, 0));
+    }
+    void Effect2t8()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(180, 90, 0));
+    }
+    void Effect7t3()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(45, -90, 0));
+    }
+    void Effect3t7()
+    {
+        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(45, -90, 180));
     }
 }

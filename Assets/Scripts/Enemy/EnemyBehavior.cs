@@ -53,7 +53,7 @@ public class EnemyBehavior : MonoBehaviour
         ani.SetFloat("forward", Mathf.Lerp(ani.GetFloat("forward"), targetRunMultiple, 0.2f));
         if(findPlayer)
         {
-            MoveToPlayer();
+            MoveToNextPatrolLocation();
         }
         if(agent.remainingDistance < 0.2f && !agent.pathPending &&!findPlayer)
         {
@@ -95,7 +95,8 @@ public class EnemyBehavior : MonoBehaviour
         {
             findPlayer = true;
             agent.destination = player.position;
-            GetComponent<NavMeshAgent>().speed = enemyRunSpeed;
+            GetComponent<NavMeshAgent>().speed = 10.0f;
+            print(GetComponent<NavMeshAgent>().speed);
             Debug.Log("Player detected - attack!");
         }
     }
