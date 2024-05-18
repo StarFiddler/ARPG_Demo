@@ -13,6 +13,7 @@ public class AnimatorController : MonoBehaviour
     private Vector3 thrustVec;
     private Rigidbody _rb;
     private WeaponManager wm;
+    private float destroyTime;
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,6 +22,7 @@ public class AnimatorController : MonoBehaviour
        _rb = GetComponentInParent<Rigidbody>();
        thrustVec = Vector3.zero;
        wm = GetComponent<WeaponManager>();
+       destroyTime = 1.0f;
     }
 
     // Update is called once per frame
@@ -54,7 +56,7 @@ public class AnimatorController : MonoBehaviour
 
     void Effect4t6()
     {
-        GameObject.Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(90, 0, 0));
+        Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(90, 0, 0));
     }
     void Effect6t4()
     {
