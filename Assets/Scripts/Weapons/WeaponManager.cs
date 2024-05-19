@@ -7,6 +7,7 @@ public class WeaponManager : MonoBehaviour
     public PlayerControl pc;
     public Animator ani;
     public int selectedWeapon = 1;
+    //public CharacterManager cm;
     // Start is called before the first frame update
     void Awake()
     {
@@ -30,7 +31,7 @@ public class WeaponManager : MonoBehaviour
     {
         int i = 0;
         selectedWeapon = ani.GetLayerIndex(pc.battleStyle) - 1;
-        print(selectedWeapon);
+        //print(selectedWeapon);
         foreach(Transform weapon in transform)
         {
             if(i == selectedWeapon)
