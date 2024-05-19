@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b23f08d2ae4cba14087c1ed36193d82b, type: 3}
+  m_Name: TTF2Behavior
+  m_EditorClassIdentifier: 
+  mBehaviorSource:
+    behaviorName: TTF2Behavior
+    behaviorDescription: 
+    mTaskData:
+      types: []
+      parentIndex: 
+      startIndex: 
+      variableStartIndex: 
+      JSONSerialization: '{"EntryTask":{"Type":"BehaviorDesigner.Runtime.Tasks.EntryTask","NodeData":{"Offset":"(459,-39)"},"ID":0,"Name":"Entry","Instant":true},"RootTask":{"Type":"BehaviorDesigner.Runtime.Tasks.Repeater","NodeData":{"Offset":"(-1,121)"},"ID":1,"Name":"Repeater","Instant":true,"SharedIntcount":{"Type":"BehaviorDesigner.Runtime.SharedInt","Name":null,"Int32mValue":1},"SharedBoolrepeatForever":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":false},"SharedBoolendOnFailure":{"Type":"BehaviorDesigner.Runtime.SharedBool","Name":null,"BooleanmValue":true},"Children":[{"Type":"BehaviorDesigner.Runtime.Tasks.Sequence","NodeData":{"Offset":"(-1,151)"},"ID":2,"Name":"Sequence","Instant":true,"AbortTypeabortType":"None","Children":[{"Type":"FindPosition","NodeData":{"Offset":"(-233.142792,152.428375)"},"ID":3,"Name":"FindSelf","Instant":true,"GameObjectobj":0,"SharedVector3pos":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":null,"IsShared":true,"IsDynamic":true,"Vector3mValue":"(0,0,0)"},"SharedVector3variables":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"selfPos","IsShared":true,"Vector3mValue":"(0,0,0)"}},{"Type":"FindPosition","NodeData":{"Offset":"(171.142776,163.856934)"},"ID":4,"Name":"FindEnemy","Instant":true,"GameObjectobj":1,"SharedVector3pos":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":null,"IsShared":true,"IsDynamic":true,"Vector3mValue":"(0,0,0)"},"SharedVector3variables":{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"enemyPos","IsShared":true,"Vector3mValue":"(0,0,0)"}}]}]},"DetachedTasks":[{"Type":"BehaviorDesigner.Runtime.Tasks.Unity.UnityString.SetString","NodeData":{"Offset":"(-3.85688639,389.571228)"},"ID":5,"Name":"Set
+        String","Instant":true,"SharedStringvariable":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"IsShared":true,"StringmValue":""},"SharedStringvalue":{"Type":"BehaviorDesigner.Runtime.SharedString","Name":null,"StringmValue":""}}],"Variables":[{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"selfPos","IsShared":true,"Vector3mValue":"(0,0,0)"},{"Type":"BehaviorDesigner.Runtime.SharedVector3","Name":"enemyPos","IsShared":true,"Vector3mValue":"(0,0,0)"}]}'
+      fieldSerializationData:
+        typeName: []
+        fieldNameHash: 
+        startIndex: 
+        dataPosition: 
+        unityObjects:
+        - {fileID: 0}
+        - {fileID: 0}
+        byteData: 
+        byteDataArray: 
+      Version: 1.6.6
