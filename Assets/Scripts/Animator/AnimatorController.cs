@@ -39,13 +39,13 @@ public class AnimatorController : MonoBehaviour
         thrustVec = Vector3.zero; 
     }
 
-    void EnemyJump()
+    /*void EnemyJump()
     {
         thrustVec = new Vector3(0, 5 ,0);
         //ani.SetBool("IsGround", false);
         _rb.velocity += thrustVec;
         thrustVec = Vector3.zero; 
-    }
+    }*/
 
     /*void EnemyDash()
     {

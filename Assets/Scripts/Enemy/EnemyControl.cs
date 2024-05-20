@@ -8,6 +8,7 @@ public class EnemyControl : MonoBehaviour
     public GameObject target;
     public Transform patrolRoute;
     public Rigidbody _rb;
+    public SkillManager _sm;
     //public List<Transform> locations;
     //private int locationIndex = 0;
     private Vector3 pos;
@@ -15,19 +16,31 @@ public class EnemyControl : MonoBehaviour
     //private NavMeshAgent agent;
     private bool lockPlaneVector = false;
     private float currentTime;
+    private float skillTime;
+    private float skillOntime;
     // Start is called before the first frame update
     void Awake()
     {
         ani = obj.GetComponentInChildren<Animator>();
         _rb = GetComponent<Rigidbody>();
         pos = Vector3.zero;
+        //_sm = GetComponet<SkillManager>();
         //agent = GetComponent<NavMeshAgent>();
-        
     }
 
     // Update is called once per frame
     void Update()
     {
+        skillTime = Time.time - skillOntime;
+        print(skillTime);
+        if(skillTime >= _sm.skillCD)
+        {
+            ani.SetBool("canAttack"+"1", true);
+        }
+        else
+        {
+            ani.SetBool("canAttack"+"1", false);
+        }
         /*if(lockPlaneVector == true)
         {
             obj.transform.position = Vector3.zero;
@@ -40,6 +53,7 @@ public class EnemyControl : MonoBehaviour
 
     public void OnAttackEnter()
     {
+        
         //pos = _rb.velocity;
         //_rb.velocity = Vector3.zero;
         //print(_rb.velocity);
@@ -59,6 +73,7 @@ public class EnemyControl : MonoBehaviour
 
     public void OnAttackExit()
     {
+        skillOntime = Time.time;
         //lockPlaneVector = false;
     }
 }
