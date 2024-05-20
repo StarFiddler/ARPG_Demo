@@ -5,6 +5,7 @@ using BehaviorDesigner.Runtime.Tasks;
 public class EnemyControl : MonoBehaviour
 {
     public GameObject obj;
+    public GameObject target;
     public Transform patrolRoute;
     public Rigidbody _rb;
     //public List<Transform> locations;
@@ -13,10 +14,11 @@ public class EnemyControl : MonoBehaviour
     private Animator ani;
     //private NavMeshAgent agent;
     private bool lockPlaneVector = false;
+    private float currentTime;
     // Start is called before the first frame update
     void Awake()
     {
-        ani = obj.GetComponent<Animator>();
+        ani = obj.GetComponentInChildren<Animator>();
         _rb = GetComponent<Rigidbody>();
         pos = Vector3.zero;
         //agent = GetComponent<NavMeshAgent>();
@@ -38,15 +40,25 @@ public class EnemyControl : MonoBehaviour
 
     public void OnAttackEnter()
     {
-        pos = _rb.velocity;
-        _rb.velocity = Vector3.zero;
-        print(_rb.velocity);
+        //pos = _rb.velocity;
+        //_rb.velocity = Vector3.zero;
+        //print(_rb.velocity);
         //lockPlaneVector = true;
+    }
+
+    public void OnAttackUpdate()
+    {
+        currentTime = ani.GetCurrentAnimatorStateInfo(0).normalizedTime;
+        if(ani.GetCurrentAnimatorStateInfo(0).normalizedTime < 0.55f && ani.GetCurrentAnimatorStateInfo(0).normalizedTime > 0.15f)
+        {
+            obj.transform.position = Vector3.MoveTowards(obj.transform.position, target.transform.position, 10.0f * Time.deltaTime);
+        }
+        
+        obj.transform.forward = target.transform.localPosition - obj.transform.position;
     }
 
     public void OnAttackExit()
     {
-        _rb.velocity = pos;
         //lockPlaneVector = false;
     }
 }

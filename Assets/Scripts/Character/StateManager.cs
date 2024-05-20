@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateManager : CharacterManagerInterface
 {
-    public float HP = 100.0f;
+    public int HP = 100;
     // Start is called before the first frame update
     void Awake()
     {

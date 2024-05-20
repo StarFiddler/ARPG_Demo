@@ -29,6 +29,6 @@ public class CharacterManager : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        sm.Test();
+        //sm.Test();
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerBehaviors : MonoBehaviour
 {
+  public StateManager sm;
      
   /*
   public float moveSpeed = 10f;
@@ -158,7 +159,7 @@ public class PlayerBehaviors : MonoBehaviour
   {
     if(collision.gameObject.name == "Enemy")
     {
-      _gameManager.HP -=1;
+      sm.HP -=1;
     }
   }
 
