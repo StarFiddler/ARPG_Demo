@@ -61,7 +61,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.55357456
+        functionName: AttackJudgeWake
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3761e7c7c61c3c84d94afd3feeeb030e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8380652
+        functionName: AttackJudgeSleep
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 3761e7c7c61c3c84d94afd3feeeb030e, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

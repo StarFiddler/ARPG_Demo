@@ -16,8 +16,16 @@ public class EnemyControl : MonoBehaviour
     //private NavMeshAgent agent;
     private bool lockPlaneVector = false;
     private float currentTime;
-    private float skillTime;
-    private float skillOntime;
+
+    struct Skills
+    {
+    public float skillTime;
+    public float skillOntime;
+    };
+
+    Skills skill1;
+    Skills skill2;
+    Skills skill3;
     // Start is called before the first frame update
     void Awake()
     {
@@ -31,16 +39,37 @@ public class EnemyControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        skillTime = Time.time - skillOntime;
-        print(skillTime);
-        if(skillTime >= _sm.skillCD)
+        // skill1.skillTime = Time.time - skill1.skillOntime;
+        // if(skill1.skillTime >= _sm.skillCD)
+        // {
+        //     ani.SetBool("canAttack1", true);
+        //     skill1.skillOntime = Time.time;
+        // }
+        // else
+        // {
+        //     ani.SetBool("canAttack1", false);
+        // }
+        skill2.skillTime = Time.time - skill2.skillOntime;
+        if(skill2.skillTime >= _sm.skillCD)
         {
-            ani.SetBool("canAttack"+"1", true);
+            ani.SetBool("canAttack2", true);
+            //skill2.skillOntime = Time.time;
         }
         else
         {
-            ani.SetBool("canAttack"+"1", false);
+            ani.SetBool("canAttack2", false);
         }
+        // skill3.skillTime = Time.time - skill3.skillOntime;
+        // if(skill3.skillTime >= _sm.skillCD)
+        // {
+        //     ani.SetBool("canAttack3", true);
+        //     skill3.skillOntime = Time.time;
+        // }
+        // else
+        // {
+        //     ani.SetBool("canAttack3", false);
+        // }
+
         /*if(lockPlaneVector == true)
         {
             obj.transform.position = Vector3.zero;
@@ -53,7 +82,7 @@ public class EnemyControl : MonoBehaviour
 
     public void OnAttackEnter()
     {
-        
+
         //pos = _rb.velocity;
         //_rb.velocity = Vector3.zero;
         //print(_rb.velocity);
@@ -67,13 +96,26 @@ public class EnemyControl : MonoBehaviour
         {
             obj.transform.position = Vector3.MoveTowards(obj.transform.position, target.transform.position, 10.0f * Time.deltaTime);
         }
-        
-        obj.transform.forward = target.transform.localPosition - obj.transform.position;
+
+        obj.transform.forward = new Vector3(target.transform.localPosition.x - obj.transform.position.x, 0f, target.transform.localPosition.z - obj.transform.position.z);
     }
 
-    public void OnAttackExit()
+    // public void OnAttack1Exit()
+    // {
+    //     skill1.skillOntime = Time.time;
+
+    //     //lockPlaneVector = false;
+    // }
+    public void OnAttack2Exit()
     {
-        skillOntime = Time.time;
-        //lockPlaneVector = false;
-    }
+        skill2.skillOntime = Time.time;
+
+    //     //lockPlaneVector = false;
+     }
+    // public void OnAttack3Exit()
+    // {
+    //     skill3.skillOntime = Time.time;
+
+    //     //lockPlaneVector = false;
+    // }
 }

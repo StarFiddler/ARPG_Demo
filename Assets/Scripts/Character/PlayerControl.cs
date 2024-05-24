@@ -309,6 +309,15 @@ public class PlayerControl : MonoBehaviour
         print("GM");
     }*/
 
+    public void OnHitEnter()
+    {
+        pi.inputEnable = false;
+    }
+    public void OnHitExit()
+    {
+        pi.inputEnable = true;
+    }
+
     public void OnNormalModeEnter()
     {
         pi.inputEnable = true;

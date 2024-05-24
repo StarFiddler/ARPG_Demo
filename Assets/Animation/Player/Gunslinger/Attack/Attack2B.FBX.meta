@@ -619,7 +619,21 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.1161417
+        functionName: WakeUpGun
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ebf229797f02e484d9d1a1a428100738, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.92561305
+        functionName: SheathGun
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ebf229797f02e484d9d1a1a428100738, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

@@ -655,7 +655,21 @@ ModelImporter:
           preInfinity: 3
           postInfinity: 3
           rotationOrder: 4
-      events: []
+      events:
+      - time: 0.4983315
+        functionName: WakeUpGun
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ebf229797f02e484d9d1a1a428100738, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.88803166
+        functionName: SheathGun
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: ebf229797f02e484d9d1a1a428100738, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

@@ -70,6 +70,16 @@ public class AnimatorController : MonoBehaviour
         GameObject.Find("PropsHandle").SendMessage("SheathWeapon", SendMessageOptions.DontRequireReceiver);
     }
 
+    void WakeUpGun()
+    {
+        GameObject.Find("GunslingerHandle").SendMessage("WakeUpWeapon", SendMessageOptions.DontRequireReceiver);
+    }
+    void SheathGun()
+    {
+        GameObject.Find("GunslingerHandle").SendMessage("SheathWeapon", SendMessageOptions.DontRequireReceiver);
+    }
+
+
     void Effect4t6()
     {
         Instantiate(SlashEffect, model.transform.position + model.transform.forward * -0.5f + model.transform.up * 1.5f, SlashEffect.transform.rotation = model.transform.rotation * Quaternion.Euler(90, 0, 0));

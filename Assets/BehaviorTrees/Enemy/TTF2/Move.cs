@@ -25,7 +25,8 @@ public class Move : Action
         obj.Value.transform.position = pos.Value;
         //_rb.velocity = pos.Value;
         //obj.Value.transform.position += _rb.velocity * Time.deltaTime;
-        obj.Value.transform.forward = targetObj.Value.transform.localPosition - obj.Value.transform.position;
+        //obj.Value.transform.forward = targetObj.Value.transform.localPosition - obj.Value.transform.position;
+        obj.Value.transform.forward = new Vector3(targetObj.Value.transform.localPosition.x - obj.Value.transform.position.x, 0f, targetObj.Value.transform.localPosition.z - obj.Value.transform.position.z);
         ani.SetFloat("forward", Mathf.Lerp(ani.GetFloat("forward"), 2, 0.2f));
         //variable.Value = pos.Value;
         return TaskStatus.Success;
