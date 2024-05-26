@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class StateManager : CharacterManagerInterface
 {
-    public int HP = 100;
+    public int playerHP;
+    public int enemyAttack;
     // Start is called before the first frame update
     void Awake()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -17,8 +18,16 @@ public class StateManager : CharacterManagerInterface
         
     }
 
-    public void Test()
+    // public void Test()
+    // {
+    //     print(HP);
+    // }
+    public void AddHP(int value)
     {
-        print(HP);
+        playerHP += value;
     }
+    public void ReduceHP(int value)
+    {
+        playerHP -= value;
+    } 
 }

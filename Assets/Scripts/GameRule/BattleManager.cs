@@ -10,11 +10,13 @@ public class BattleManager : MonoBehaviour
     public Animator targetAni;
     public Rigidbody targetRb;
     private Vector3 thrustVec;
+    private StateManager sm;
     void Awake()
     {
        targetRb = targetObj.GetComponent<Rigidbody>();
        targetAni = targetObj.GetComponentInChildren<Animator>();
        thrustVec = Vector3.zero;
+       sm = targetObj.GetComponent<StateManager>();
     }
 
     void OnTriggerEnter(Collider col)
@@ -24,7 +26,9 @@ public class BattleManager : MonoBehaviour
             thrustVec = new Vector3(targetObj.transform.forward.x * -5f, 5f, targetObj.transform.forward.z * -5f);
             targetRb.velocity += thrustVec;
             targetAni.SetTrigger("Hit3");
-            // Debug.Log("Player detected - attack!");
+            sm.ReduceHP(sm.enemyAttack);
+            print(sm.playerHP);
+            Debug.Log("Player detected - attack!");
             thrustVec = Vector3.zero;
         }
     }

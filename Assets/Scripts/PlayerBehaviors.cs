@@ -159,7 +159,7 @@ public class PlayerBehaviors : MonoBehaviour
   {
     if(collision.gameObject.name == "Enemy")
     {
-      sm.HP -=1;
+      sm.playerHP -=1;
     }
   }
 
