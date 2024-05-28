@@ -2846,7 +2846,7 @@ ModelImporter:
     - name: pelvis
       parentName: root
       position: {x: -0.0012462778, y: 0.9696024, z: -0.0011085094}
-      rotation: {x: -0.4777144, y: 0.5213339, z: -0.4777144, w: 0.5213339}
+      rotation: {x: -0.5, y: 0.5, z: -0.5, w: 0.5}
       scale: {x: 0.99999994, y: 0.9999999, z: 0.99999994}
     - name: spine_01
       parentName: pelvis
@@ -3266,7 +3266,7 @@ ModelImporter:
     - name: thigh_l
       parentName: pelvis
       position: {x: 0.013195266, y: -0.0053282166, z: -0.10503288}
-      rotation: {x: 0, y: 0, z: 0.06975647, w: 0.9975641}
+      rotation: {x: 0, y: 0, z: 0.13052616, w: 0.9914449}
       scale: {x: 1.0000002, y: 1.0000005, z: 1.0000002}
     - name: calf_l
       parentName: thigh_l
@@ -3296,7 +3296,7 @@ ModelImporter:
     - name: thigh_r
       parentName: pelvis
       position: {x: 0.014838409, y: -0.004847183, z: 0.10696885}
-      rotation: {x: 0, y: -0, z: 0.9975641, w: -0.06975647}
+      rotation: {x: 0, y: 0, z: -0.9914449, w: 0.13052626}
       scale: {x: 1.0000004, y: 1.0000005, z: 1.0000005}
     - name: calf_r
       parentName: thigh_r

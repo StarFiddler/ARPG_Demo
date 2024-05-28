@@ -5,10 +5,14 @@ using UnityEngine;
 public class StateManager : CharacterManagerInterface
 {
     public int playerHP;
+    public int playerAttack;
+    public int enemyHP;
     public int enemyAttack;
+
     // Start is called before the first frame update
     void Awake()
     {
+
 
     }
 
@@ -22,12 +26,21 @@ public class StateManager : CharacterManagerInterface
     // {
     //     print(HP);
     // }
-    public void AddHP(int value)
+    public void AddHP(int HP, int Heal)
     {
-        playerHP += value;
+
+        HP += Heal;
     }
-    public void ReduceHP(int value)
+    public void ReducePlayerHP()
     {
-        playerHP -= value;
+        playerHP -= enemyAttack;
+    } 
+    public void ReduceHP(int HP, int Attack)
+    {
+        print("HP:" + HP);
+        print("Attack:" + Attack);
+        HP -= Attack;
+        print(HP);
+        //return HP;
     } 
 }

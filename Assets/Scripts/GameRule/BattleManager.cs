@@ -2,43 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//[RequireComponet(typeof(CapsuleCollider))]
-public class BattleManager : MonoBehaviour
+public class BattleManager : CharacterManagerInterface
 {
     public GameObject obj;
-    public GameObject targetObj;
-    public Animator targetAni;
-    public Rigidbody targetRb;
+    public GameObject enemyObj;
+    public CameraController cam;
+    public Rigidbody rb;
     private Vector3 thrustVec;
-    private StateManager sm;
+    // Start is called before the first frame update
     void Awake()
     {
-       targetRb = targetObj.GetComponent<Rigidbody>();
-       targetAni = targetObj.GetComponentInChildren<Animator>();
-       thrustVec = Vector3.zero;
-       sm = targetObj.GetComponent<StateManager>();
+        obj = GameObject.Find("Miku");
+        enemyObj = GameObject.Find("TTF2");
+        cam = this.GetComponentInChildren<CameraController>();
+        rb = this.GetComponent<Rigidbody>();
+        thrustVec = Vector3.zero;
     }
 
-    void OnTriggerEnter(Collider col)
+    // Update is called once per frame
+    void Update()
     {
-        if(col.name == "Player")
+        
+    }
+
+    public void Back()//击退
+    {
+        if(cam.lockPos == true)
         {
-            thrustVec = new Vector3(targetObj.transform.forward.x * -5f, 5f, targetObj.transform.forward.z * -5f);
-            targetRb.velocity += thrustVec;
-            targetAni.SetTrigger("Hit3");
-            sm.ReduceHP(sm.enemyAttack);
-            print(sm.playerHP);
-            Debug.Log("Player detected - attack!");
+            thrustVec = new Vector3(obj.transform.forward.x * -2f, 0, obj.transform.forward.z * -2f);
+            rb.velocity += thrustVec;
+            thrustVec = Vector3.zero;
+        }
+        else
+        {
+            thrustVec = new Vector3(enemyObj.transform.forward.x * 2f, 0, enemyObj.transform.forward.z * 2f);
+            rb.velocity += thrustVec;
             thrustVec = Vector3.zero;
         }
     }
-
-    void ColliderWakeUp()
+    public void BlowUp()//吹飞
     {
-        transform.GetComponent<Collider>().enabled = true;
-    }
-    void ColliderSleep()
-    {
-        transform.GetComponent<Collider>().enabled = false;
+        if(cam.lockPos == true)
+        {
+            thrustVec = new Vector3(obj.transform.forward.x * -5f, 5f, obj.transform.forward.z * -5f);
+            rb.velocity += thrustVec;
+            thrustVec = Vector3.zero;
+        }
+        else
+        {
+            thrustVec = new Vector3(enemyObj.transform.forward.x * 5f, 5f, enemyObj.transform.forward.z * 5f);
+            rb.velocity += thrustVec;
+            thrustVec = Vector3.zero;
+        }
     }
 }

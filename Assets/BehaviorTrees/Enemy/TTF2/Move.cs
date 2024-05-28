@@ -23,6 +23,7 @@ public class Move : Action
     {
     	//切换动画状态为攻击
         obj.Value.transform.position = pos.Value;
+        //_rb.Moveposition = pos.Value;
         //_rb.velocity = pos.Value;
         //obj.Value.transform.position += _rb.velocity * Time.deltaTime;
         //obj.Value.transform.forward = targetObj.Value.transform.localPosition - obj.Value.transform.position;

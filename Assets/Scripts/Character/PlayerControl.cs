@@ -144,6 +144,7 @@ public class PlayerControl : MonoBehaviour
         }
         _rb.position += dP;
         _rb.position += _pV * Time.fixedDeltaTime; //平面移动坐标向量
+        //_rb.velocity = _pV;
         dP = Vector3.zero;
         /*_rb.velocity = new Vector3(_pV.x, _rb.velocity.y, _pV.z) + thrustVec;
         thrustVec = Vector3.zero;*/
@@ -427,7 +428,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    private void Sheath()//收刀后清空所有战斗图层权重
+    public void Sheath()//收刀后清空所有战斗图层权重
     {
         pi.inputEnable = true;
         int j = ani.layerCount;
