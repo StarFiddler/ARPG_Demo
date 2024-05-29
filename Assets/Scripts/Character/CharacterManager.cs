@@ -69,13 +69,14 @@ public class CharacterManager : MonoBehaviour
     public void Die()
     {
         pc.Sheath();
-        ani.SetTrigger("Die");
+        ani.SetBool("Die", true);
         pi.inputEnable = false;
         if(pc.cam.lockPos = true)
         {
             pc.cam.CameraLock();
         }
         pc.cam.enabled = false;
+        //pc.GetComponent<Collider>().enabled = false;
     }
     public void EnemyDie()
     {
@@ -84,37 +85,23 @@ public class CharacterManager : MonoBehaviour
         //this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionY;
     }
 
-    // public void PlayerDamage(string hitStyle)
-    // {
-    //     sm.ReduceHP(sm.playerHP, sm.enemyAttack);
-    //     print("玩家生命" + sm.playerHP);
-    //     if(sm.playerHP > 0)
-    //     {
-    //         switch(hitStyle)
-    //         {
-    //             case "SoftHit":
-    //             SoftHit();
-    //             break;
-    //             case "NormalHit":
-    //             NormalHit();
-    //             break;
-    //             case "HeavyHit":
-    //             HeavyHit();
-    //             break;
-    //         }
-    //     }
-    //     else
-    //     {
-    //         Die();
-    //     }
-    // }
-    public void PlayerDamage()
+    public void PlayerDamage(string hitStyle)
     {
-        sm.ReduceHP(sm.playerHP, sm.enemyAttack);
-        print(sm.playerHP);
+        sm.ReducePlayerHP();
         if(sm.playerHP > 0)
         {
-
+            switch(hitStyle)
+            {
+                case "SoftHit":
+                SoftHit();
+                break;
+                case "NormalHit":
+                NormalHit();
+                break;
+                case "HeavyHit":
+                HeavyHit();
+                break;
+            }
         }
         else
         {
@@ -125,7 +112,6 @@ public class CharacterManager : MonoBehaviour
     public void EnemyDamage()
     {
         sm.ReduceHP(sm.enemyHP, sm.playerAttack);
-        print(sm.enemyHP);
         if(sm.enemyHP > 0)
         {
 

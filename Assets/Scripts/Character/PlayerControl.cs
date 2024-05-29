@@ -16,7 +16,7 @@ public class PlayerControl : MonoBehaviour
     private WeaponManager wm;
     private Animator ani;
     //private Animator m_ani;
-    private Rigidbody _rb;
+    public Rigidbody _rb;
     private Vector3 _pV;//plane vector，平面移动向量
     private Vector3 thrustVec;//冲量；
     private Vector3 dP;//deltaPositon

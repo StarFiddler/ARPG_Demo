@@ -34,7 +34,7 @@ public class ColliderManager : MonoBehaviour
             // targetRb.velocity += thrustVec;
             //targetObj.transform.position += thrustVec * Time.deltaTime;
             //targetAni.SetTrigger("Hit3");
-            cm.PlayerDamage();
+            cm.PlayerDamage("HeavyHit");
             //sm.ReduceHP(sm.enemyAttack);
             //Debug.Log("Player detected - attack!");
             // thrustVec = Vector3.zero;
